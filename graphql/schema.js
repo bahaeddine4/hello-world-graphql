@@ -9,24 +9,6 @@ const {
 const mongoose = require('mongoose');
 const userModel = require('../mongo/user'); 
 
-const users = [
-  {
-    id: "0",
-    name: "john",
-    password: "1"
-  },
-  {
-    id: "1",
-    name: "paul",
-    password: "2"
-  },
-  {
-    id: "2",
-    name: "alain",
-    password: "3"
-  }
-];
-
 const userType = new GraphQLObjectType({
   name: "user",
   fields: {
@@ -46,14 +28,14 @@ const RootQuery = new GraphQLObjectType({
           type: GraphQLString
         }
       },
-      resolve(parentValue, args) {
-        return users[args.id];
+      resolve(parentValue, {id}) {  
+        return userModel.findById(id)
       }
     },
     users: {
       type: GraphQLList(userType),
       resolve(){
-        return users
+        return userModel.find()
       }
     }
   }
@@ -75,12 +57,18 @@ const mutation = new GraphQLObjectType({
       resolve(parentValue, {name, password}) {
         const user = new userModel({name, password});
         return user.save()
-          then(res => {
-            console.log('success ', res);
-            return res 
-          })
-          .catch(console.log) 
       }
+    },
+    removeUser: {
+      type: userType,
+      args: {
+        id: {
+          type: GraphQLString
+        }
+      },
+      resolve(parentValue, {id}){
+        return userModel.findByIdAndRemove(id)
+      } 
     }
   }
 });
