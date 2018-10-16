@@ -69,6 +69,30 @@ const mutation = new GraphQLObjectType({
       resolve(parentValue, {id}){
         return userModel.findByIdAndRemove(id)
       } 
+    },
+    updateUser: {
+      type: userType,
+      args: {
+        id: {
+          type: GraphQLString
+        },
+        name: {
+          type: GraphQLString
+        },
+        password: {
+          type: GraphQLString
+        }
+      },
+      resolve(parentValue, {id, name, password}){
+        const set = {};
+        if(name) {
+          set['name'] = name
+        }
+        if(password) {
+          set['password'] = password
+        }
+        return userModel.findOneAndUpdate({_id: id}, set)
+      } 
     }
   }
 });
