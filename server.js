@@ -1,7 +1,7 @@
 const express = require('express');
 const expressGraphQL = require('express-graphql');
 const mongoose = require('mongoose');
-const schema = require('./graphql/schema');
+const schema = require('./graphql');
 
 const app = express();
 mongoose.connect('mongodb://localhost:27017/test');
