@@ -1,11 +1,10 @@
-const graphql = require("graphql");
-const {
+import {
   GraphQLObjectType,
   GraphQLString,
-} = graphql;
+} from 'graphql';
 
-const userModel = require('../mongo/user'); 
-const userType = require('./schemas');
+import userModel from '../mongo/user'
+import userType from './schemas'
 
 const mutation = new GraphQLObjectType({
   name: "mutation",
@@ -56,4 +55,4 @@ const mutation = new GraphQLObjectType({
   }
 });
 
-module.exports = mutation;
+export default mutation;

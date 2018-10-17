@@ -1,12 +1,11 @@
-const graphql = require("graphql");
-const {
+import {
   GraphQLObjectType,
   GraphQLString,
   GraphQLList,
-} = graphql;
+} from 'graphql';
 
-const userModel = require('../mongo/user'); 
-const userType = require('./schemas');
+import userModel from '../mongo/user'
+import userType from './schemas'
 
 const query = new GraphQLObjectType({
   name: "query",
@@ -32,4 +31,4 @@ const query = new GraphQLObjectType({
 });
 
 
-module.exports = query;
+export default query;

@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose'
+const { Schema, model } = mongoose;
 
-var userSchema = new Schema({
+const userSchema = new Schema({
   name:  String,
   password: String,
 });
