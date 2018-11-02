@@ -1,8 +1,9 @@
-import mongoose from 'mongoose'
-const { Schema, model } = mongoose;
+import mongoose from 'mongoose';
+
+const { Schema } = mongoose;
 
 const userSchema = new Schema({
-  name:  String,
+  name: String,
   password: String,
 });
 
